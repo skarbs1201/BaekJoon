@@ -20,6 +20,7 @@ public class BaekJoon_13023 {
         for (int i = 0; i < N; i++) {
             list.add(new ArrayList<Integer>());
         }
+        
         for (int i = 0; i < M; i++) {
             st = new StringTokenizer(br.readLine());
             int a = Integer.parseInt(st.nextToken());
