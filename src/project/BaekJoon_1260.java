@@ -36,19 +36,22 @@ public class BaekJoon_1260 {
         dfs(V - 1, 1, N);
     }
     public static void dfs(int start, int depth, int N) {
+        
         if (depth == N) {
-            System.out.println(output + "" + start);
+            System.out.println(output);
+            output.remove(output.size() - 1);
             return;
         }
         
         status[start] = true;
         for (int i : list.get(start)) {
+            
             if (status[i] != true) {
                 output.add(i + 1);
                 dfs(i, depth + 1, N);
             }
         }
-        output.remove(start);
+        output.remove(output.size() - 1);
         status[start] = false;
     }
 }
