@@ -5,6 +5,8 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.Queue;
 
 public class BaekJoon_1260 {
     static ArrayList<ArrayList<Integer>> list = new ArrayList<>();
@@ -34,9 +36,14 @@ public class BaekJoon_1260 {
         
         output.add(V);
         dfs(V - 1, 1, N);
-    }
-    public static void dfs(int start, int depth, int N) {
         
+        output.clear();
+        
+        output.add(V);
+        bfs(V - 1, N);
+    }
+    
+    public static void dfs(int start, int depth, int N) {
         if (depth == N) {
             System.out.println(output);
             output.remove(output.size() - 1);
@@ -45,7 +52,6 @@ public class BaekJoon_1260 {
         
         status[start] = true;
         for (int i : list.get(start)) {
-            
             if (status[i] != true) {
                 output.add(i + 1);
                 dfs(i, depth + 1, N);
@@ -53,5 +59,24 @@ public class BaekJoon_1260 {
         }
         output.remove(output.size() - 1);
         status[start] = false;
+    }
+    
+    public static void bfs(int start, int N) {
+        Queue<Integer> queue = new LinkedList<Integer>();
+        queue.offer(start);
+        status[start] = true;
+        
+        while (!queue.isEmpty()) {
+            int next = queue.poll();
+            
+            for (int i : list.get(start)) {
+                if (!status[i]) {
+                    queue.offer(i);
+                    status[i] = true;
+                    output.add(i + 1);
+                }
+            }
+        }
+        System.out.println(output);
     }
 }
